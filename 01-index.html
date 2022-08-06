@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang=“en">
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    color: #eee;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #2c3e50;
+}
+
+ .login{ 
+    /* 超出部分隐藏 */
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 450px;
+    background-color: #34495e;
+    border-radius: 10px;
+    box-shadow: 10px 10px 20px rgba(33, 44, 55, 3);
+}
+h1{
+    font-size: 45px;
+    font-weight: 400;
+    /* 提高层级 */
+    z-index:1;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 230px; 
+    /* 提高层级 */
+    z-index:1;
+} 
+input{
+    width: 200px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #eee;
+    font-size: 16px;
+    outline: none;
+}
+input::placeholder{
+    font-size: 12px;
+    color: #eee;
+}
+button{
+    width: 180px;
+    height: 36px;
+    border: 1px solid #eee;
+    border-radius: 18px;
+    background-color: transparent;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* 设置span */
+span{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 0;
+    height: 0;
+    background-color: #916968;
+    /* 鼠标居中 */
+    transform: translate(-50%,-50%);
+    /* 圆的形式展开 */
+    border-radius: 50%;
+
+}
+
+/* 鼠标进入 login 时的动画 */
+@keyframes in {
+    0%{
+        width: 0;
+        height:0;
+    }
+    100%{
+        width:1200px;
+        height:1200px
+    }
+}
+
+/* 鼠标离开 login 时的动画 */
+@keyframes out{
+    0%{
+        width: 1200px;
+        height: 1200px
+    
+    }
+    100%{
+        width: 0px;
+        height: 0px;
+    }
+    
+}
+</style>
+<头>
+    <元字符集=“UTF-8">
+    <meta http-equiv=“X-UA-Compatible” content=“IE=edge">
+    <元名称=“视口”内容=“宽度=设备宽度，初始比例=1.0">
+    <标题>hover效果</标题>
+
+</头>
+
+<身体>
+
+    <div class=“login">
+        <h1></h1>
+        <表单操作="">
+            <输入类型=“文本”占位符=“账号">
+            <输入类型=“文本”占位符=“密码">
+            <按钮>登录</按钮>
+        </形式>
+    </迪夫>
+
+
+    <脚本>
+        获取 login 元素
+        让登录 = 文档。querySelector（'.login')
+
+        让跨度
+        让 inTime， outTime
+        let isIn = true //默认开关 打开
+        let isOut = false
+
+        鼠标进入事件
+        登录。addEventListener（'mouseenter'， function （e) {
+
+            isOut = false //默认关闭
+            如果 （isIn) {
+                inTime = new Date（）。获取时间()
+
+                生成 span 元素
+                跨度 = 文档。createElement（'span')
+                登录。追加子（跨度）)
+
+                span 去使用 in 动画
+                跨度。样式。动画 = “在 .5s 缓出向前”
+
+                计算 top 和 left 值
+                让 top = e。客户端Y - e.目标。偏移顶部
+                让左 = e。客户端 X - e.目标。偏移左
+
+                跨度。样式。顶部 = 顶部 + “像素”
+                跨度。样式。左 = 左 + “px”
+                isIn = false //当我们执行完程序后， 关闭
+                isOut = true //当我们执行完里面的程序，再打开
+            }
+
+
+        })
+
+
+        鼠标离开事件
+        登录。addEventListener（'mouseleave'， function （e) {
+
+            如果 （isOut) {
+                outTime = new Date（）。获取时间()
+                let passTime = outTime - inTime
+
+                如果（及格时间< 500) {
+                    setTimeout（mouseleava， 500 - passTime）//已经经过的时间就不要了
+                } 还 {
+                    mouseleava()
+                }
+            }
+
+
+
+            函数 mouseleava() {
+                跨度。样式。动画 = “出 .5 秒缓出前进”
+
+                计算 top 和 left 值
+                让 top = e。客户端Y - e.目标。偏移顶部
+                让左 = e。客户端 X - e.目标。偏移左
+
+                跨度。样式。顶部 = 顶部 + “像素”
+                跨度。样式。左 = 左 + “px”
+
+                注意：要给一个定时器，因为动画是有时间的
+                setTimeout（函数 () {
+                    登录。移除子（跨度）)
+                    isIn = true //当我们执行完鼠标离开事件里的程序，才再次打开
+                }， 500)
+
+            }
+        })
+    </脚本>
+</身体>
+
+</断续器>
